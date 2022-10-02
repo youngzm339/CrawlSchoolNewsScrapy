@@ -24,7 +24,7 @@ jobs:
         run: git clone https://github.com/youngzm339/school-news-HAUT ${{ github.workspace }}/school-news-HAUT
 
       - name: Switch to correct folder
-        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut/ && sudo chmod 777 ./schoolnews_haut/spiders/*
+        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut/schoolnews_haut/ && sudo chmod 777 ./spiders/*
 
       - name: Build tzgg-news.py
         run: python -m scrapy runspider ${{ github.workspace }}/school-news-HAUT/schoolnews_haut/schoolnews_haut/spiders/tzgg-news.py -o ${{ github.workspace }}/public/tzgg-news.json
