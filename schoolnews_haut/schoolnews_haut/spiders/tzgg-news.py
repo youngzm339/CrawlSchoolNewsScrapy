@@ -1,4 +1,6 @@
 import scrapy
+import sys 
+sys.path.append("..") 
 from schoolnews_haut.items import SchoolnewsHautItem
 
 
