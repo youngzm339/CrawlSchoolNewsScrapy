@@ -18,7 +18,7 @@ jobs:
         run: sudo pip install scrapy
 
       - name: Create folder
-        run: mkdir ~/public
+        run: mkdir ~/public && cd ~
 
       - name: Clone
         run: git clone https://github.com/youngzm339/school-news-HAUT
@@ -27,16 +27,16 @@ jobs:
         run: cd ./school-news-HAUT/schoolnews_haut/ && pwd && tree
 
       - name: Build tzgg-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/tzgg-news.py -o ~/public/tzgg-news.json
+        run: python -m scrapy runspider ~/school-news-HAUT/schoolnews_haut/schoolnews_haut/spiders/tzgg-news.py -o ~/public/tzgg-news.json
 
       - name: Build xsdt-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/xsdt-news.py -o ~/public/xsdt-news.json
+        run: python -m scrapy runspider ~/school-news-HAUT/schoolnews_haut/schoolnews_haut/spiders/xsdt-news.py -o ~/public/xsdt-news.json
 
       - name: Build xxyw-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/xxyw-news.py -o ~/public/xxyw-news.json
+        run: python -m scrapy runspider ~/school-news-HAUT/schoolnews_haut/schoolnews_haut/spiders/xxyw-news.py -o ~/public/xxyw-news.json
 
       - name: Build zhxx-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/zhxx-news.py -o ~/public/zhxx-news.json
+        run: python -m scrapy runspider ~/school-news-HAUT/schoolnews_haut/schoolnews_haut/spiders/zhxx-news.py -o ~/public/zhxx-news.json
 
       - name: Push
         uses: peaceiris/actions-gh-pages@v3
