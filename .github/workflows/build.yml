@@ -1,0 +1,47 @@
+name: Build target file
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "01 * * * *"
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Scrapy
+        run: sudo pip install scrapy
+
+      - name: Create folder
+        run: cd ~ && mkdir public
+
+      - name: Switch to correct folder
+        run: git clone https://github.com/youngzm339/school-news-HAUT && cd ./school-news-HAUT/schoolnews_haut
+
+      - name: Build tzgg-news.py
+        run: python -m scrapy runspider ./schoolnews_haut/spiders/tzgg-news.py -o ~/public/tzgg-news.json
+
+      - name: Build xsdt-news.py
+        run: python -m scrapy runspider ./schoolnews_haut/spiders/xsdt-news.py -o ~/public/xsdt-news.json
+
+      - name: Build xxyw-news.py
+        run: python -m scrapy runspider ./schoolnews_haut/spiders/xxyw-news.py -o ~/public/xxyw-news.json
+
+      - name: Build zhxx-news.py
+        run: python -m scrapy runspider ./schoolnews_haut/spiders/zhxx-news.py -o ~/public/zhxx-news.json
+
+      - name: Push
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # 这里的 ACTIONS_DEPLOY_KEY 则是上面设置 Private Key的变量名
+          external_repository: youngzm339/school-news-HAUT # Pages 远程仓库 
+          publish_dir: "~/public"
+          keep_files: false # remove existing files
+          publish_branch: publish  # deploying branch
+          commit_message: ${{ github.event.head_commit.message }}
+      
