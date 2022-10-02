@@ -1,7 +1,7 @@
 import scrapy
 import sys 
 sys.path.append("..") 
-from schoolnews_haut.items import SchoolnewsHautItem
+from items import SchoolnewsHautItem
 
 
 class NewsSpider(scrapy.Spider):
