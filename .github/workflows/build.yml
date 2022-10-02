@@ -24,8 +24,8 @@ jobs:
         run: git clone https://github.com/youngzm339/school-news-HAUT
 
       - name: Switch to correct folder
-        run: cd ./school-news-HAUT/schoolnews_haut/
-        
+        run: cd ./school-news-HAUT/schoolnews_haut/ && pwd
+
       - name: Build tzgg-news.py
         run: python -m scrapy runspider ./schoolnews_haut/spiders/tzgg-news.py -o ~/public/tzgg-news.json
 
