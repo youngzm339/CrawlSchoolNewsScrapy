@@ -11,16 +11,14 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
         with:
-          python-version: 3.7
+          python-version: "3.10"
 
       - name: Setup Scrapy
-        run: sudo pip install scrapy
+        run: pip install scrapy
 
       - name: Create folder
         run: mkdir ${{ github.workspace }}/public && cd ${{ github.workspace }}
@@ -47,9 +45,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # 这里的 ACTIONS_DEPLOY_KEY 则是上面设置 Private Key的变量名
-          external_repository: youngzm339/school-news-HAUT # Pages 远程仓库 
+          external_repository: youngzm339/school-news-HAUT # Pages 远程仓库
           publish_dir: "${{ github.workspace }}/public"
           keep_files: false # remove existing files
-          publish_branch: publish  # deploying branch
+          publish_branch: publish # deploying branch
           commit_message: ${{ github.event.head_commit.message }}
-      
