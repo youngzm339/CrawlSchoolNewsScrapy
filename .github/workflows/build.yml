@@ -26,20 +26,20 @@ jobs:
       - name: Clone
         run: git clone https://github.com/youngzm339/school-news-HAUT ${{ github.workspace }}/school-news-HAUT
 
-      - name: Switch to correct folder
-        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut
+      # - name: Switch to correct folder
+      #   run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut
 
       - name: Build tzgg-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/tzgg-news.py -o ${{ github.workspace }}/public/tzgg-news.json
+        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut && python -m scrapy runspider ./schoolnews_haut/spiders/tzgg-news.py -o ${{ github.workspace }}/public/tzgg-news.json
 
       - name: Build xsdt-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/xsdt-news.py -o ${{ github.workspace }}/public/xsdt-news.json
+        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut && python -m scrapy runspider ./schoolnews_haut/spiders/xsdt-news.py -o ${{ github.workspace }}/public/xsdt-news.json
 
       - name: Build xxyw-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/xxyw-news.py -o ${{ github.workspace }}/public/xxyw-news.json
+        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut && python -m scrapy runspider ./schoolnews_haut/spiders/xxyw-news.py -o ${{ github.workspace }}/public/xxyw-news.json
 
       - name: Build zhxx-news.py
-        run: python -m scrapy runspider ./schoolnews_haut/spiders/zhxx-news.py -o ${{ github.workspace }}/public/zhxx-news.json
+        run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut && python -m scrapy runspider ./schoolnews_haut/spiders/zhxx-news.py -o ${{ github.workspace }}/public/zhxx-news.json
 
       - name: Push
         uses: peaceiris/actions-gh-pages@v3
