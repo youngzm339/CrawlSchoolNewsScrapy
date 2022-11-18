@@ -24,7 +24,7 @@ jobs:
         run: mkdir ${{ github.workspace }}/public && cd ${{ github.workspace }}
 
       - name: Clone
-        run: git clone https://github.com/youngzm339/school-news-HAUT ${{ github.workspace }}/school-news-HAUT
+        run: git clone https://github.com/youngzm339/CrawlSchoolNewsScrapy ${{ github.workspace }}/school-news-HAUT
 
       # - name: Switch to correct folder
       #   run: cd ${{ github.workspace }}/school-news-HAUT/schoolnews_haut
@@ -45,7 +45,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # 这里的 ACTIONS_DEPLOY_KEY 则是上面设置 Private Key的变量名
-          external_repository: youngzm339/school-news-HAUT # Pages 远程仓库
+          external_repository: youngzm339/CrawlSchoolNewsScrapy # Pages 远程仓库
           publish_dir: "${{ github.workspace }}/public"
           keep_files: false # remove existing files
           publish_branch: publish # deploying branch
